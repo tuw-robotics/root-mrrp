@@ -40,8 +40,8 @@
         "--net=host",
         "--pid=host",
         "--ipc=host",
-        "--hostname=tuw-release",
-        "--add-host=tuw-release:127.0.0.1",
+        "--hostname=tuw-mrrp",
+        "--add-host=tuw-mrrp:127.0.0.1",
         "--name=${localWorkspaceFolderBasename}",
         "-e", "DISPLAY=${env:DISPLAY}"
     ],
