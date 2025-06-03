@@ -1,0 +1,53 @@
+{
+  // Pressing Ctrl+Shift+B or running Run Build Task from the global Terminal menu show the following picker:
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "pkgs",
+      "description": "Which ros pkg do like?",
+      "options": [
+        "tuw_geometry",
+        "tuw_msgs"
+      ]
+    },
+    {
+      "type": "pickString",
+      "id": "workspace",
+      "description": "Workspace?",
+      "options": [
+        "ws00",
+        "ws01",
+        "ws02"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "label": "colcon",
+      "detail": "builds a workspace using colcon",
+      "type": "shell",
+      "command": "cd ..; source env.sh; cd -; colcon build --symlink-install  --cmake-args -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+      "options": {
+        "cwd": "${workspaceFolder}/${input:workspace}/"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "colcon pkgs",
+      "detail": "builds a specified package using colcon",
+      "type": "shell",
+      "command": "cd ..; source env.sh; cd -; colcon build --packages-select ${input:pkgs} --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Debug",
+      "options": {
+        "cwd": "${workspaceFolder}/${input:workspace}/"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+    "name": "ROS 2 Development Container",
+    "privileged": true,
+    "remoteUser": "${localEnv:USER}",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "USERNAME": "${localEnv:USER}",
+            "USER_UID": "${localEnv:USER_ID}",
+            "USER_GID": "${localEnv:GROUP_ID}",
+            "PROJECT_NAME": "${localEnv:PROJECT_NAME}",
+            "DOCKER_OWNER": "${localEnv:DOCKER_OWNER}",
+            "DOCKER_PREFIX": "${localEnv:DOCKER_PREFIX}",
+            "ROS_DISTRO": "${localEnv:ROS_DISTRO}"
+        }
+    },
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions":[
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.makefile-tools",
+                "ms-iot.vscode-ros",
+                "ms-azuretools.vscode-docker",
+                "mine.cpplint"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "unix:0",
+        "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
+        "ROS_DOMAIN_ID": "42"
+    },
+    "runArgs": [
+        "--device=/dev/input/js0",
+        "--net=host",
+        "--pid=host",
+        "--ipc=host",
+        "--hostname=tuw-release",
+        "--add-host=tuw-release:127.0.0.1",
+        "--name=${localWorkspaceFolderBasename}",
+        "-e", "DISPLAY=${env:DISPLAY}"
+    ],
+    "mounts": [
+       "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+       "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+       "source=${localWorkspaceFolder}/.devcontainer/bash_history,target=${localEnv:HOME}/.bash_history,type=bind",
+       "source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,type=bind"
+       "source=${localEnv:HOME}/.config/bloom,target=${localEnv:HOME}/.config/bloom,type=bind",
+
+    ],
+    "initializeCommand": [
+        "sh",
+        "-c",
+        "if [ ! -f ${localWorkspaceFolder}/.devcontainer/bash_history ]; then touch ${localWorkspaceFolder}/.devcontainer/bash_history; fi"
+    ],
+    "postCreateCommand": "printf '\n   ****   Welcome to your ${localWorkspaceFolderBasename} container   ****\n\n\n'"
+}

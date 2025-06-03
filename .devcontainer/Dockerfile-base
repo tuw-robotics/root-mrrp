@@ -1,0 +1,40 @@
+ARG ROS_DISTRO
+FROM ros:${ROS_DISTRO:-jazzy}
+
+# update pkg index
+RUN apt-get update && apt-get upgrade -y
+
+# install utils (like git, vim, nano, ...)
+RUN apt-get install -y  \
+       gdb              \
+       bash-completion  \
+       cmake-curses-gui \
+       rsync            \
+       nano             \
+       vim              \
+       wget             \
+       tmux             \
+       tmuxinator       \
+       iputils-ping     \
+       keychain         
+
+# dependencies for stage and stage_ros2
+RUN apt-get install -y git  g++ 
+
+ #  GUI tools
+RUN apt-get install  -y \
+      geany \
+      meld 
+      
+# install some ros pgks
+RUN apt-get install  -y \
+      ros-$ROS_DISTRO-rviz2
+
+# install python pip and somd code format checker
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+      python3-pip \
+      python3-bloom \
+      python3-catkin-pkg \
+      cpplint flake8 black
+
+
