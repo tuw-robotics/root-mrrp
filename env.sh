@@ -6,7 +6,7 @@ if [ ! -f $PWD/.env.local ]; then
     echo "export PROJECT_NAME=$PROJECT_NAME               # defines your project name" >> .env.local
     echo 'export PROJECT_DIR=${PROJECTS_DIR}/${PROJECT_NAME}   # defines your project root' >> .env.local
     echo "export DOCKER_OWNER=tuwrobotics                 # used to name docker owner" >> .env.local 
-    echo "export DOCKER_PREFIX=tr                         # used to name docker images" >> .env.local 
+    echo "export DOCKER_PREFIX=tm                         # used to name docker images" >> .env.local 
     echo "export USER_ID=$(id -u)                   # user id" >> .env.local 
     echo "export GROUP_ID=$(id -g)                  # group id" >> .env.local 
     echo "export ROS_DOMAIN_ID=0                          # Can be used to avoid interference"  >> .env.local

@@ -49,14 +49,12 @@
        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
        "source=${localWorkspaceFolder}/.devcontainer/bash_history,target=${localEnv:HOME}/.bash_history,type=bind",
-       "source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,type=bind",
-       "source=${localEnv:HOME}/.config/bloom,target=${localEnv:HOME}/.config/bloom,type=bind",
-
+       "source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,type=bind"
     ],
     "initializeCommand": [
         "sh",
         "-c",
-        "if [ ! -f ${localWorkspaceFolder}/.devcontainer/bash_history ]; then touch ${localWorkspaceFolder}/.devcontainer/bash_history; fi"
+        "if [ ! -f ${localWorkspaceFolder}/.devcontainer/bash_history ]; then touch ${localWorkspaceFolder}/.devcontainer/bash_history; fi",
     ],
     "postCreateCommand": "printf '\n   ****   Welcome to your ${localWorkspaceFolderBasename} container   ****\n\n\n'"
 }
